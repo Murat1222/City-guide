@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/css/contact.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Начало header -->
+    <header class="header">
+      <div class="container">
+        <nav class="header__menu">
+          <a href="./index.html"><img class="header__logo" src="./assets/img/logo.webp" alt="logo"></a>
+          <li><a class="header__text" href="./index.html">Главная</a></li>
+          <li><a class="header__text" href="./contact.html">Контакты</a></li>
+          <li><a class="header__text" href="./attractions.html">Достопримечательности</a></li>
+          <!-- бургер кнопка -->
+          <div class="burger" id="burger">
+            <span class="burger__span"></span>
+          </div>
+          <div class="burger__menu" id="menu">
+            <ul>
+              <li><a href="./index.html">Главная</a></li>
+              <li><a href="./contact.html">Контакты</a></li>
+              <li><a href="./attractions.html">Достопримечательности</a></li>
+            </ul>
+          </div>
+          <!-- скрипт для бургер кнопки -->
+          <script src="./assets/js/burger.js"></script>
+        </nav>
+      </div>
+    </header>
+    <!-- Конец header -->
+    <!-- Начало main -->
+    <main class="main">
+      <div class="container">
+        <div class="main__block">
+          <p class="main__txt">Вы попали на страницу контактов! Мы стремимся обеспечить вам максимально комфортное и
+            беспроблемное использование наших услуг. Если у вас возникли вопросы, проблемы или вам нужна помощь,
+            пожалуйста, воспользуйтесь кнопкой "Связаться с нами"</p>
+          <button id="open-modal-btn" class="main__btn">Связаться с нами</button>
+        </div>
+        <div class="modal" id="my-modal">
+          <div class="modal__box">
+            <button class="modal__close-btn" id="close-my-modal-btn"><img class="modal__img"
+                src="./assets/img/close.png" alt="close"></button>
+            <h1>Заявка</h1>
+            <form id="complaint-form">
+              <div class="modal__group">
+                <p for="name">Ваше имя:</p>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="modal__group">
+                <p for="email">Ваш email:</p>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="modal__group">
+                <p for="subject">Тема обращения:</p>
+                <input type="text" id="subject" name="subject" required>
+              </div>
+              <div class="modal__group">
+                <p for="message">Описание проблемы:</p>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button class="modal__button" type="submit">Отправить заявку</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Скрипт для модального окна -->
+      <script src="./assets/js/contact.js"></script>
+    </main>
+    <!-- Конец main -->
+    <!-- Начало footer -->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__section footer__section--about">
+          <img class="footer__logo" src="./assets/img/logo.webp" alt="">
+        </div>
+        <div class="footer__section">
+          <h3 class="footer__title">Ссылки</h3>
+          <ul class="footer__list">
+            <li class="footer__list-item"><a href="./index.html" class="footer__link">Главная</a></li>
+            <li class="footer__list-item"><a href="./contact.html" class="footer__link">Контакты</a></li>
+            <li class="footer__list-item"><a href="./attractions.html" class="footer__link">Достопримечательности</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__section">
+          <h3 class="footer__title">Контакты</h3>
+          <p class="footer__text">Адрес: г. Казань, ул. Сююмбике 2-4</p>
+          <p class="footer__text">Телефон: +7 (999) 989-18-90</p>
+          <p class="footer__text">Email: KazanTravel@gmail.com</p>
+        </div>
+        <div class="footer__section">
+          <h3 class="footer__title">Наша команда</h3>
+          <p class="footer__text">Иванов Сергей</p>
+          <p class="footer__text">Лютоев Михаил</p>
+          <p class="footer__text">Изиланов Никита</p>
+          <p class="footer__text">Ахметханов Мурат</p>
+          <p class="footer__text">Нигматуллин Инсаф</p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2024 Все права защищены.</p>
+      </div>
+  </div>
+  </footer>
+  <!-- Конец footer -->
+</body>
+
+</html>
