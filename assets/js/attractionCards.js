@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const initialCardsData = data.slice(0, blocksPerPage);
 
         showAttractionCards(initialCardsData);
+        showPaginationButtons(data.length, blocksPerPage);
       }
     })
     .catch(() => {

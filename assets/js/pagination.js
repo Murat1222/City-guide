@@ -15,25 +15,29 @@ const showPaginationButtons = (totalItemsCount, blocksPerPage) => {
     button.textContent = buttonNumber;
 
     button.addEventListener('click', () => {
-      console.log(buttonNumber, blocksPerPage);
+      const loader = getLoadingIndicator();
+      const attractionCardsContainer = document.querySelector(".main__blocks");
 
-      fetchAttractionsData(buttonNumber, blocksPerPage).then((data) => {
-        console.log(data);
+      attractionCardsContainer.innerHTML = "";
+      attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
 
-        if (data) {
-          showAttractionCards(data);
-        }
-      });
+      fetchAttractionsData(buttonNumber, blocksPerPage)
+        .then((data) => {
+          if (data) {
+            showAttractionCards(data);
+          }
+        })
+        .catch(() => {
+          const errorMessageElement = document.createElement("span");
+
+          errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+          attractionCardsContainer.append(errorMessageElement);
+        })
+        .finally(() => {
+          loader.remove();
+        });
     });
 
     if (paginationButtonsContainer) paginationButtonsContainer.append(button);
   }
 };
-
-document.addEventListener('DOMContentLoaded', () => {
-  const blocks = document.querySelectorAll('.main__block');
-
-  fetchAttractionsData().then((data) => {
-    showPaginationButtons(data.length, blocksPerPage);
-  });
-});
