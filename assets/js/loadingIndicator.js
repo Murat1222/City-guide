@@ -1,5 +1,5 @@
 const getLoadingIndicator = () => {
-  const loader = document.createElement("p");
+  const loader = document.createElement("div");
 
   loader.classList = "loader";
 
