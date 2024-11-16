@@ -23,10 +23,12 @@ const fetchAttractionsData = (...rest) => {
   return fetch(url, options).then((response) => {
     if (response.ok) {
       return response.json();
+    } else {
+      throw new Error("Возникла ошибка при запросе");
     }
   })
     .then((result) => result)
-    .catch(() => {
-      alert("Возникла ошибка при запросе");
+    .catch((error) => {
+      throw new Error(error);
     })
 };

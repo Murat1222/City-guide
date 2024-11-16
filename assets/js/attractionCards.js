@@ -49,11 +49,26 @@ const showAttractionCards = (data) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetchAttractionsData().then((data) => {
-    if (data) {
-      const initialCardsData = data.slice(0, blocksPerPage);
+  const attractionCardsContainer = document.querySelector(".main__blocks");
+  const loader = getLoadingIndicator();
 
-      showAttractionCards(initialCardsData);
-    }
-  });
+  attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
+
+  fetchAttractionsData()
+    .then((data) => {
+      if (data) {
+        const initialCardsData = data.slice(0, blocksPerPage);
+
+        showAttractionCards(initialCardsData);
+      }
+    })
+    .catch(() => {
+      const errorMessageElement = document.createElement("span");
+
+      errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+      attractionCardsContainer.append(errorMessageElement);
+    })
+    .finally(() => {
+      loader.remove();
+    })
 });
