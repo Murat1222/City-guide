@@ -4,6 +4,15 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -265,6 +274,9 @@ body {
   left: -1px;
 }
 
+.main {
+  flex: 1;
+}
 .main__link {
   color: grey;
 }
