@@ -27,70 +27,35 @@
             <li><a href="./attractions.html">Достопримечательности</a></li>
           </ul>
         </div>
-            <script src="./assets/js/search.js"></script>
-            <script src="./assets/js/burger.js"></script>
+        <script src="./assets/js/search.js"></script>
+        <script src="./assets/js/burger.js"></script>
       </nav>
     </div>
   </header>
   <!-- Конец header -->
   <div class="under">
     <div class="works">
-      <p class="works__text">Категорий</p>
+      <p class="works__text">Категории</p>
       <div class="works__nav">
         <a class="works__nav-link" href="#" data-filter="all">Все</a>
         <a class="works__nav-link" href="#" data-filter="square">Площади</a>
         <a class="works__nav-link" href="#" data-filter="park">Парки</a>
         <a class="works__nav-link" href="#" data-filter="mosque">Мечети</a>
-        <script src="./assets/js/filter.js"></script>
       </div>
     </div>
   </div>
   <!-- Начало main -->
   <main class="main">
     <div class="container">
+      <script src="./assets/js/search.js"></script>
       <div class="main__text-block">
         <p class="main__text">Достопримечательности</p>
-        <div class="main__blocks">
-          <div class="main__block-first main__block" data-cat="square">
-            <img src="./assets/img/KazanKreml.webp" alt="KazanKreml" class="main__block-img">
-            <div class="main__block-text">
-              <div class="main__block-txt block-title">Казанский Кремль</div>
-              <div class="main__block-description">Казанский кремль — древнейшая часть и цитадель Казани, комплекс архитектурных, исторических и археологических памятников...</div>
-              <div class="main__block-adress"><a class="main__link" target="_blank" href="https://yandex.ru/maps/-/CDdMvJ9J">Казань, Респ. Татарстан, 420014</a></div>
-            </div>
-          </div>
-          <div class="main__block-second main__block" data-cat="mosque">
-            <img src="./assets/img/Qulsharif.webp" alt="Qulsharif" class="main__block-img">
-            <div class="main__block-text">
-              <div class="main__block-txt block-title">Мечеть Кул Шариф</div>
-              <div class="main__block-description">Мечеть «Кул-Шариф» — главная джума-мечеть республики Татарстан и города Казани...</div>
-              <div class="main__block-adress"><a class="main__link" target="_blank" href="https://yandex.ru/maps/-/CDdMvOO9">ул. Шейнкмана, Казань, Респ. Татарстан, 420014</a></div>
-            </div>
-          </div>
-          <div class="main__block-third main__block" data-cat="mosque">
-            <img src="./assets/img/syuyumbike.webp" alt="Qulsharif" class="main__block-img">
-            <div class="main__block-text">
-              <div class="main__block-txt block-title">Башня Сююмбике</div>
-              <div class="main__block-description">Башня Сююмбике — краснокирпичная, семиярусная, высотой 58 метров...</div>
-              <div class="main__block-adress"><a class="main__link" target="_blank" href="https://yandex.ru/maps/-/CDdMr-7c">ул. Шейнкмана, Казань, Респ. Татарстан, 420111</a></div>
-            </div>
-          </div>
-          <div class="main__block-fourth main__block park" data-cat="park">
-            <img src="./assets/img/CenterFamily.webp" alt="Qulsharif" class="main__block-img">
-            <div class="main__block-text">
-              <div class="main__block-txt block-title">Центр семьи «Казан»</div>
-              <div class="main__block-description">Центр семьи «Казан» — главный дворец бракосочетаний в городе Казань и республике Татарстан...</div>
-              <div class="main__block-adress"><a class="main__link" target="_blank" href="https://yandex.ru/maps/-/CDdMrVYy">ул. Сибгата Хакима, 4, Казань, Респ. Татарстан, 420066</a></div>
-            </div>
-          </div>
-          <div class="main__block-fifth main__block park" data-cat="park">
-            <img src="./assets/img/park.webp" alt="Qulsharif" class="main__block-img">
-            <div class="main__block-text">
-              <div class="main__block-txt block-title">«Парк тысячелетия»</div>
-              <div class="main__block-description">Парк Тысячелетия — парк в Вахитовском районе Казани...</div>
-              <div class="main__block-adress"><a class="main__link" target="_blank" href="https://yandex.ru/maps/-/CDdMnHME">ул. Островского, Казань, Респ. Татарстан, 420107</a></div>
-            </div>
-          </div>
+        <div class="main__blocks" id="main__blocks">
+          <script src="./assets/js/attracionCards.js"></script>
+        </div>
+        <div class="main__pagination">
+          <script src="./assets/js/pagination.js"></script>
+          <script src="./assets/js/cityGuideAPI.js"></script>
         </div>
       </div>
     </div>
