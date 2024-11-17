@@ -20,12 +20,12 @@ const handleInput = (event) => {
         showPaginationButtons(data.length, blocksPerPage);
       }
     })
-    .catch(() => {
+    .catch((error) => {
       const errorMessageElement = document.createElement("span");
 
       attractionCardsContainer.innerHTML = "";
       paginationButtonsContainer.innerHTML = "";
-      errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+      errorMessageElement.textContent = error;
       attractionCardsContainer.append(errorMessageElement);
     })
     .finally(() => {

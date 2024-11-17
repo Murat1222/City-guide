@@ -63,10 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
         showPaginationButtons(data.length, blocksPerPage);
       }
     })
-    .catch(() => {
+    .catch((error) => {
       const errorMessageElement = document.createElement("span");
 
-      errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+      errorMessageElement.textContent = error;
       attractionCardsContainer.append(errorMessageElement);
     })
     .finally(() => {

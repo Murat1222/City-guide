@@ -10,11 +10,16 @@ const fetchAttractionsData = (urlObject) => {
     if (response.ok) {
       return response.json();
     } else {
-      throw new Error("Возникла ошибка при запросе");
+      if (response.status === 404) throw new Error('404, Ничего не найдено');
+      if (response.status === 500) throw new Error('500, Внутренняя ошибка сервера');
+
+      throw new Error(response.status);
     }
   })
     .then((result) => result)
     .catch((error) => {
-      throw new Error(error);
+      const errorMessage = "message" in error ? error.message : "Не удалось выполнить запрос"
+      
+      throw new Error(errorMessage);
     })
 };

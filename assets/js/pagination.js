@@ -28,10 +28,10 @@ const showPaginationButtons = (totalItemsCount, blocksPerPage) => {
             showAttractionCards(data);
           }
         })
-        .catch(() => {
+        .catch((error) => {
           const errorMessageElement = document.createElement("span");
 
-          errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+          errorMessageElement.textContent = error;
           attractionCardsContainer.append(errorMessageElement);
         })
         .finally(() => {
