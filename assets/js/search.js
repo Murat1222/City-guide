@@ -8,11 +8,11 @@ const handleInput = (event) => {
   const urlObject = getUrlObject(cityGuideApiUrl, null, null, inputValue);
 
   attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
+  attractionCardsContainer.innerHTML = "";
+  paginationButtonsContainer.innerHTML = "";
 
   fetchAttractionsData(urlObject)
     .then((data) => {
-      console.log(data);
-
       if (data) {
         const firstPageElementsData = data.slice(0, blocksPerPage);
 
@@ -23,8 +23,6 @@ const handleInput = (event) => {
     .catch((error) => {
       const errorMessageElement = document.createElement("span");
 
-      attractionCardsContainer.innerHTML = "";
-      paginationButtonsContainer.innerHTML = "";
       errorMessageElement.textContent = error;
       attractionCardsContainer.append(errorMessageElement);
     })
