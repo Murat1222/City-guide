@@ -36,13 +36,13 @@ const getAttractionCardElement = (data) => {
   return cardContainer;
 };
 
-const showAttractionCards = (data) => {
+const showAttractionCards = (attractionsData) => {
   const attractionCardsContainer = document.querySelector(".main__blocks");
 
   attractionCardsContainer.innerHTML = "";
 
-  data.forEach((data) => {
-    const card = getAttractionCardElement(data)
+  attractionsData.forEach((attractionData) => {
+    const card = getAttractionCardElement(attractionData);
 
     attractionCardsContainer.append(card);
   });
