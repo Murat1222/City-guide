@@ -1,5 +1,4 @@
 let categoriesLinks = null;
-let activeCategoryName = null;
 
 const filterAttractionsBlocks = (categoryName) => {
   let urlObject = null;
@@ -34,8 +33,9 @@ const filterAttractionsBlocks = (categoryName) => {
 };
 
 const handleCategoryClick = (event) => {
+  const activeCategoryName = event.target.getAttribute('data-filter');
+  
   event.preventDefault();
-  activeCategoryName = event.target.getAttribute('data-filter');
   filterAttractionsBlocks(activeCategoryName);
 };
 
