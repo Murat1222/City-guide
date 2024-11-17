@@ -2,34 +2,10 @@ let categoriesLinks = null;
 
 const filterAttractionsBlocks = (categoryName) => {
   let urlObject = null;
-  const loader = getLoadingIndicator();
-  const attractionCardsContainer = document.querySelector(".main__blocks");
-  const paginationButtonsContainer = document.querySelector(".main__pagination");
   const currentCategoryName = categoryName === "all" ? null : categoryName;
 
   urlObject = getUrlObject(cityGuideApiUrl, null, null, null, currentCategoryName);
-  attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
-  attractionCardsContainer.innerHTML = "";
-  paginationButtonsContainer.innerHTML = "";
-
-  fetchAttractionsData(urlObject)
-    .then((data) => {
-      if (data) {
-        const firstPageElementsData = data.slice(0, blocksPerPage);
-
-        showAttractionCards(firstPageElementsData);
-        showPaginationButtons(data.length, blocksPerPage);
-      }
-    })
-    .catch((error) => {
-      const errorMessageElement = document.createElement("span");
-
-      errorMessageElement.textContent = error;
-      attractionCardsContainer.append(errorMessageElement);
-    })
-    .finally(() => {
-      loader.remove();
-    });
+  showAttractionSection(urlObject);
 };
 
 const handleCategoryClick = (event) => {

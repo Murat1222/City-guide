@@ -48,18 +48,21 @@ const showAttractionCards = (data) => {
   });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+const showAttractionSection = (urlObject) => {
   const attractionCardsContainer = document.querySelector(".main__blocks");
+  const paginationButtonsContainer = document.querySelector(".main__pagination");
   const loader = getLoadingIndicator();
-  const urlObject = getUrlObject(cityGuideApiUrl);
 
   attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
+  attractionCardsContainer.innerHTML = "";
+  paginationButtonsContainer.innerHTML = "";
+
   fetchAttractionsData(urlObject)
     .then((data) => {
       if (data) {
-        const initialCardsData = data.slice(0, blocksPerPage);
+        const firstPageElementsData = data.slice(0, blocksPerPage);
 
-        showAttractionCards(initialCardsData);
+        showAttractionCards(firstPageElementsData);
         showPaginationButtons(data.length, blocksPerPage);
       }
     })
@@ -71,5 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .finally(() => {
       loader.remove();
-    })
+    });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const urlObject = getUrlObject(cityGuideApiUrl);
+
+  showAttractionSection(urlObject);
 });
