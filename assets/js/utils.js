@@ -24,12 +24,13 @@ function debounce(fn, timeoutMs = 250) {
   }
 };
 
-function getUrlObject(url, page, limit, title) {
-  const urlObject = new URL('https://6734e04a5995834c8a9132b6.mockapi.io/attractions');
+function getUrlObject(url, page, limit, title, category) {
+  const urlObject = new URL(url);
 
   if (page) urlObject.searchParams.append('page', page);
   if (limit) urlObject.searchParams.append('limit', limit);
   if (title) urlObject.searchParams.append('title', title);
+  if (category) urlObject.searchParams.append('category', category);
 
   return urlObject;
 };

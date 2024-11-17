@@ -1,31 +1,52 @@
-let categoriesLinks = document.querySelectorAll('a[data-filter]');
+let categoriesLinks = null;
 let activeCategoryName = null;
-let attractionsBlocks = null;
 
-const filterAttractionsBlocks = (blocks, categoryName) => {
-  blocks.forEach((attractionBlock) => {
-    if (categoryName === "all" || attractionBlock.getAttribute('data-cat') === categoryName) {
-      attractionBlock.classList.remove('hide');
-    } else {
-      attractionBlock.classList.add('hide');
-    }
-  })
+const filterAttractionsBlocks = (categoryName) => {
+  let urlObject = null;
+  const loader = getLoadingIndicator();
+  const attractionCardsContainer = document.querySelector(".main__blocks");
+  const paginationButtonsContainer = document.querySelector(".main__pagination");
+  const currentCategoryName = categoryName === "all" ? null : categoryName;
+
+  urlObject = getUrlObject(cityGuideApiUrl, null, null, null, currentCategoryName);
+  attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
+  attractionCardsContainer.innerHTML = "";
+  paginationButtonsContainer.innerHTML = "";
+
+  fetchAttractionsData(urlObject)
+    .then((data) => {
+      if (data) {
+        const firstPageElementsData = data.slice(0, blocksPerPage);
+
+        showAttractionCards(firstPageElementsData);
+        showPaginationButtons(data.length, blocksPerPage);
+      }
+    })
+    .catch((error) => {
+      const errorMessageElement = document.createElement("span");
+
+      errorMessageElement.textContent = error;
+      attractionCardsContainer.append(errorMessageElement);
+    })
+    .finally(() => {
+      loader.remove();
+    });
 };
 
-if (localStorage.getItem("activeCategoryName")) {
-  document.addEventListener("DOMContentLoaded", () => {
-    attractionsBlocks = document.querySelectorAll('.main__block');
-    activeCategoryName = localStorage.getItem("activeCategoryName");
-    filterAttractionsBlocks(attractionsBlocks, activeCategoryName);
-  });
-}
+const handleCategoryClick = (event) => {
+  event.preventDefault();
+  activeCategoryName = event.target.getAttribute('data-filter');
+  filterAttractionsBlocks(activeCategoryName);
+};
 
-categoriesLinks.forEach((categoryLink) => {
-  categoryLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    activeCategoryName = categoryLink.getAttribute('data-filter');
-    attractionsBlocks = document.querySelectorAll('.main__block');
-    filterAttractionsBlocks(attractionsBlocks, activeCategoryName);
-    localStorage.setItem("activeCategoryName", activeCategoryName);
+const debouncedHandleCategoryClick = debounce(handleCategoryClick);
+
+document.addEventListener("DOMContentLoaded", () => {
+  categoriesLinks = document.querySelectorAll('a[data-filter]');
+
+  categoriesLinks.forEach((categoryLink) => {
+    categoryLink.addEventListener('click', (event) => {
+      debouncedHandleCategoryClick(event);
+    })
   });
-})
+});
