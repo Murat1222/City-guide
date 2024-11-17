@@ -51,10 +51,10 @@ const showAttractionCards = (data) => {
 document.addEventListener("DOMContentLoaded", () => {
   const attractionCardsContainer = document.querySelector(".main__blocks");
   const loader = getLoadingIndicator();
+  const urlObject = getUrlObject(cityGuideApiUrl);
 
   attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
-
-  fetchAttractionsData()
+  fetchAttractionsData(urlObject)
     .then((data) => {
       if (data) {
         const initialCardsData = data.slice(0, blocksPerPage);

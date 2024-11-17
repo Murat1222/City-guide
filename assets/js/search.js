@@ -5,15 +5,18 @@ const handleInput = (event) => {
   const attractionCardsContainer = document.querySelector(".main__blocks");
   const loader = getLoadingIndicator();
   const paginationButtonsContainer = document.querySelector(".main__pagination");
+  const urlObject = getUrlObject(cityGuideApiUrl, null, null, inputValue);
 
   attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
 
-  fetchAttractionsData(1, 3, inputValue)
+  fetchAttractionsData(urlObject)
     .then((data) => {
       console.log(data);
 
       if (data) {
-        showAttractionCards(data);
+        const firstPageElementsData = data.slice(0, blocksPerPage);
+
+        showAttractionCards(firstPageElementsData);
         showPaginationButtons(data.length, blocksPerPage);
       }
     })

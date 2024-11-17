@@ -17,11 +17,12 @@ const showPaginationButtons = (totalItemsCount, blocksPerPage) => {
     button.addEventListener('click', () => {
       const loader = getLoadingIndicator();
       const attractionCardsContainer = document.querySelector(".main__blocks");
+      const urlObject = getUrlObject(cityGuideApiUrl, buttonNumber, blocksPerPage);
 
       attractionCardsContainer.innerHTML = "";
       attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
 
-      fetchAttractionsData(buttonNumber, blocksPerPage)
+      fetchAttractionsData(urlObject)
         .then((data) => {
           if (data) {
             showAttractionCards(data);
