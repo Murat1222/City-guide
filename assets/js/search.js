@@ -1,17 +1,35 @@
 const searchInput = document.querySelector(".header__search-input");
 
-searchInput.addEventListener("input", (event) => {
+const handleInput = (event) => {
   const inputValue = event.target.value;
-  const attractionsBlocks = document.querySelectorAll('.main__block');
+  const attractionCardsContainer = document.querySelector(".main__blocks");
+  const loader = getLoadingIndicator();
+  const paginationButtonsContainer = document.querySelector(".main__pagination");
 
-  attractionsBlocks.forEach((attractionBlock) => {
-    const title = attractionBlock.querySelector(".block-title");
-    const regExp = new RegExp(inputValue, "i");
+  attractionCardsContainer.insertAdjacentElement('beforebegin', loader);
 
-    if (title.textContent.match(regExp)) {
-      attractionBlock.classList.remove('hide');
-    } else {
-      attractionBlock.classList.add('hide');
-    }
-  });
-});
+  fetchAttractionsData(1, 3, inputValue)
+    .then((data) => {
+      console.log(data);
+
+      if (data) {
+        showAttractionCards(data);
+        showPaginationButtons(data.length, blocksPerPage);
+      }
+    })
+    .catch(() => {
+      const errorMessageElement = document.createElement("span");
+
+      attractionCardsContainer.innerHTML = "";
+      paginationButtonsContainer.innerHTML = "";
+      errorMessageElement.textContent = "Не удалось загрузить данные. Попробуйте еще раз.";
+      attractionCardsContainer.append(errorMessageElement);
+    })
+    .finally(() => {
+      loader.remove();
+    })
+};
+
+const debouncedHandleInput = debounce(handleInput);
+
+searchInput.addEventListener("input", debouncedHandleInput);

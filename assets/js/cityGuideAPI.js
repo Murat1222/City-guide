@@ -15,6 +15,12 @@ const fetchAttractionsData = (...rest) => {
     url.searchParams.append('limit', limit);
   }
 
+  if (rest[2]) {
+    title = rest[2];
+
+    url.searchParams.append('title', title);
+  }
+
   const options = {
     method: 'GET',
     headers: { 'content-type': 'application/json' },
