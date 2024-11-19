@@ -1,5 +1,3 @@
-let categoriesLinks = null;
-
 const filterAttractionsBlocks = (categoryName) => {
   let urlObject = null;
   const currentCategoryName = categoryName === "all" ? null : categoryName;
@@ -18,7 +16,7 @@ const handleCategoryClick = (event) => {
 const debouncedHandleCategoryClick = debounce(handleCategoryClick);
 
 document.addEventListener("DOMContentLoaded", () => {
-  categoriesLinks = document.querySelectorAll('a[data-filter]');
+  const categoriesLinks = document.querySelectorAll('a[data-filter]');
 
   categoriesLinks.forEach((categoryLink) => {
     categoryLink.addEventListener('click', (event) => {
