@@ -48,6 +48,10 @@ li {
     list-style-type: none;
 }
 
+.active {
+    font-weight: 900;
+}
+
 .header li {
     @media (max-width:768px) {
         display: none;
