@@ -1,5 +1,6 @@
 const getAttractionCardElement = (data) => {
   const {
+    id,
     category,
     title: titleText,
     description: descriptionText,
@@ -16,6 +17,7 @@ const getAttractionCardElement = (data) => {
   const adressLink = document.createElement("a");
 
   cardContainer.className = "main__block-third main__block";
+  cardContainer.id = id;
   cardContainer.dataset.cat = category;
   image.className = "main__block-img";
   image.alt = shortTitle;
