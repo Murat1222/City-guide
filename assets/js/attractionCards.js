@@ -35,6 +35,10 @@ const getAttractionCardElement = (data) => {
   textInfoContainer.append(title, descriptionParagraph, adressLink);
   cardContainer.append(image, textInfoContainer)
 
+  cardContainer.addEventListener("click", () => {
+    window.location.href = `attractions-info.html?id=${id}`;
+  });
+
   return cardContainer;
 };
 
