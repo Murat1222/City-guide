@@ -1,4 +1,4 @@
-const blocksPerPage = 3;
+const blocksPerPage = 10;
 
 const handlePageButtonClick = (event) => {
   const loader = getLoadingIndicator();
