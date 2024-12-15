@@ -1,9 +1,17 @@
-const modalElement = document.getElementById('my-modal');
+class Modal {
+  constructor(modalId, openBtnId, closeBtnId) {
+    this.modalElement = document.getElementById(modalId);
+    document.getElementById(openBtnId).addEventListener("click", () => this.openModal());
+    document.getElementById(closeBtnId).addEventListener("click", () => this.closeModal());
+  }
 
-document.getElementById('open-modal-btn').addEventListener("click", function () {
-  modalElement.classList.add('open')
-})
+  openModal() {
+    this.modalElement.classList.add('open');
+  }
 
-document.getElementById('close-my-modal-btn').addEventListener("click", function () {
-  modalElement.classList.remove('open')
-})
+  closeModal() {
+    this.modalElement.classList.remove('open');
+  }
+}
+
+const modal = new Modal('my-modal', 'open-modal-btn', 'close-my-modal-btn');
