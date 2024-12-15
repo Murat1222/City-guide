@@ -1,8 +1,14 @@
-const burgerMenu = document.getElementById('burger');
-const overlay = document.getElementById('menu');
+class BurgerMenu {
+  constructor(burgerId, overlayId) {
+    this.burgerMenu = document.getElementById(burgerId);
+    this.overlay = document.getElementById(overlayId);
+    this.burgerMenu.addEventListener('click', () => this.toggleMenu());
+  }
 
-burgerMenu.addEventListener('click', function () {
-  this.classList.toggle("close");
-  overlay.classList.toggle("overlay");
-});
+  toggleMenu() {
+    this.burgerMenu.classList.toggle('close');
+    this.overlay.classList.toggle('overlay');
+  }
+}
 
+const menu = new BurgerMenu('burger', 'menu');
