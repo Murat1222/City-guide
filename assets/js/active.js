@@ -1,9 +1,23 @@
-const navLinks = document.querySelectorAll('.works__nav-link');
+class Navigation {
+  constructor(navLinks) {
+    this.navLinks = navLinks;
+    this.addEventListeners();
+  }
 
-navLinks.forEach(link => {
-  link.addEventListener('click', function (event) {
+  handleNavLinkClick(event) {
     event.preventDefault();
-    navLinks.forEach(link => link.classList.remove('active'));
-    this.classList.add('active');
-  });
+    this.navLinks.forEach(link => link.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  addEventListeners() {
+    this.navLinks.forEach(link => {
+      link.addEventListener('click', this.handleNavLinkClick.bind(this));
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll('.works__nav-link');
+  new Navigation(navLinks);
 });
