@@ -48,10 +48,6 @@ li {
     list-style-type: none;
 }
 
-.active {
-    font-weight: 900;
-}
-
 .header li {
     @media (max-width:768px) {
         display: none;
@@ -60,13 +56,6 @@ li {
 
 a {
     text-decoration: none;
-    color: #fff;
-}
-
-a:hover {
-    font-size: 30px;
-    color: rgb(82, 83, 82);
-    transition: 1s;
 }
 
 body {
@@ -131,6 +120,16 @@ body {
         padding: 10px;
         border-radius: 5px;
         border: none;
+    }
+}
+
+header a{
+    color: #fff;
+
+    &:hover {
+        font-size: 30px;
+        color: rgb(82, 83, 82);
+        transition: 1s;
     }
 }
 
@@ -414,47 +413,78 @@ body {
     }
 }
 
-.works {
-    text-align: center;
-    background-color: #a3a3a3;
+.categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-
-    &__nav a {
-        font-size: 24px;
-        gap: 20px;
-        color: rgb(37, 37, 37);
-
-        @media (max-width: 320px) {
-            font-size: 16px;
-        }
+  
+    &__header {
+      margin-bottom: 15px;
+      text-align: center;
     }
-
-    &__nav-link {
-        margin: 0 55px;
-
-        @media (max-width: 800px) {
-            margin: 0 30px;
-        }
-
-        @media (max-width: 480px) {
-            margin: 0 10px;
-        }
-
-        @media (max-width: 320px) {
-            margin: 0 5px;
-        }
+  
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333;
+      text-transform: uppercase;
+  
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+  
+      @media (max-width: 480px) {
+        font-size: 18px;
+      }
     }
-
-    &__text {
-        color: rgb(27, 27, 27);
-        text-align: center;
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 26px;
-        font-weight: 900;
+  
+    &__list {
+      display: flex;
+      gap: 15px;
+  
+      @media (max-width: 768px) {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
-}
-
+  
+    &__link {
+      font-size: 18px;
+      font-weight: 500;
+      color: #555;
+      text-decoration: none;
+      padding: 8px 12px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+  
+      &:hover {
+        color: #000;
+        border-color: #ccc;
+        background-color: #f5f5f5;
+      }
+  
+      &--active {
+        color: #fff;
+        background-color: #333;
+        border-color: #333;
+        font-weight: 700;
+      }
+  
+      @media (max-width: 768px) {
+        font-size: 16px;
+        padding: 6px 10px;
+      }
+  
+      @media (max-width: 480px) {
+        font-size: 14px;
+        padding: 5px 8px;
+      }
+    }
+  }
+  
 .footer {
     background-color: black;
     padding: 20px 0;

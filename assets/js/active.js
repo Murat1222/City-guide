@@ -6,8 +6,8 @@ class Navigation {
 
   handleNavLinkClick(event) {
     event.preventDefault();
-    this.navLinks.forEach(link => link.classList.remove('active'));
-    event.target.classList.add('active');
+    this.navLinks.forEach(link => link.classList.remove('categories__link--active'));
+    event.target.classList.add('categories__link--active');
   }
 
   addEventListeners() {
@@ -18,6 +18,6 @@ class Navigation {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll('.works__nav-link');
+  const navLinks = document.querySelectorAll('.categories__link');
   new Navigation(navLinks);
 });

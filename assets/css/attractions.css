@@ -53,10 +53,6 @@ li {
   list-style-type: none;
 }
 
-.active {
-  font-weight: 900;
-}
-
 @media (max-width: 768px) {
   .header li {
     display: none;
@@ -65,13 +61,6 @@ li {
 
 a {
   text-decoration: none;
-  color: #fff;
-}
-
-a:hover {
-  font-size: 30px;
-  color: rgb(82, 83, 82);
-  transition: 1s;
 }
 
 body {
@@ -135,6 +124,15 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: none;
+}
+
+header a {
+  color: #fff;
+}
+header a:hover {
+  font-size: 30px;
+  color: rgb(82, 83, 82);
+  transition: 1s;
 }
 
 .burger {
@@ -404,46 +402,75 @@ body {
   color: rgb(255, 255, 255);
 }
 
-.works {
-  text-align: center;
-  background-color: #a3a3a3;
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
 }
-.works__nav a {
+.categories__header {
+  margin-bottom: 15px;
+  text-align: center;
+}
+.categories__title {
   font-size: 24px;
-  gap: 20px;
-  color: rgb(37, 37, 37);
+  font-weight: 700;
+  color: #333;
+  text-transform: uppercase;
 }
-@media (max-width: 320px) {
-  .works__nav a {
-    font-size: 16px;
-  }
-}
-.works__nav-link {
-  margin: 0 55px;
-}
-@media (max-width: 800px) {
-  .works__nav-link {
-    margin: 0 30px;
+@media (max-width: 768px) {
+  .categories__title {
+    font-size: 20px;
   }
 }
 @media (max-width: 480px) {
-  .works__nav-link {
-    margin: 0 10px;
+  .categories__title {
+    font-size: 18px;
   }
 }
-@media (max-width: 320px) {
-  .works__nav-link {
-    margin: 0 5px;
+.categories__list {
+  display: flex;
+  gap: 15px;
+}
+@media (max-width: 768px) {
+  .categories__list {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
-.works__text {
-  color: rgb(27, 27, 27);
-  text-align: center;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-size: 26px;
-  font-weight: 900;
+.categories__link {
+  font-size: 18px;
+  font-weight: 500;
+  color: #555;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+.categories__link:hover {
+  color: #000;
+  border-color: #ccc;
+  background-color: #f5f5f5;
+}
+.categories__link--active {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .categories__link {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+}
+@media (max-width: 480px) {
+  .categories__link {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
 }
 
 .footer {
