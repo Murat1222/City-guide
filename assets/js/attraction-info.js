@@ -35,12 +35,58 @@ class AttractionCard {
     mapLink.className = 'main__block-map-iframe';
     mapLink.src = this.map;
 
+    image.addEventListener('click', () => this.openGallery([this.imageSource, this.imageSourceExtra], 0));
+    extraImage.addEventListener('click', () => this.openGallery([this.imageSource, this.imageSourceExtra], 1));
+
     imagesBlock.append(image, extraImage);
     textsBlock.append(title, fullDescription);
     mapBlock.append(mapLink);
     mainBlock.append(imagesBlock, textsBlock, mapBlock);
 
     return mainBlock;
+  }
+
+  openGallery(images, startIndex) {
+    const galleryOverlay = document.createElement('div');
+    const galleryImage = document.createElement('img');
+    const closeButton = document.createElement('button');
+    const prevButton = document.createElement('button');
+    const nextButton = document.createElement('button');
+
+    let currentIndex = startIndex;
+
+    galleryOverlay.className = 'gallery__overlay';
+    galleryImage.className = 'gallery__image';
+    closeButton.className = 'gallery__close';
+    prevButton.className = 'gallery__prev';
+    nextButton.className = 'gallery__next';
+
+    closeButton.textContent = 'X';
+    prevButton.textContent = '<';
+    nextButton.textContent = '>';
+
+    galleryImage.src = images[currentIndex];
+
+    galleryOverlay.append(galleryImage, closeButton, prevButton, nextButton);
+    document.body.append(galleryOverlay);
+
+    closeButton.addEventListener('click', () => galleryOverlay.remove());
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      galleryImage.src = images[currentIndex];
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      galleryImage.src = images[currentIndex];
+    });
+
+    galleryOverlay.addEventListener('click', (event) => {
+      if (event.target === galleryOverlay) {
+        galleryOverlay.remove();
+      }
+    });
   }
 }
 
