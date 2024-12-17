@@ -1,25 +1,35 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const reviewsContainer = document.querySelector('.reviews');
+class ReviewSection {
+  constructor(containerSelector, apiUrl) {
+    this.container = document.querySelector(containerSelector);
+    if (!this.container) {
+      console.error(`Не найден элемент с классом '${containerSelector}'.`);
+      return;
+    }
 
-  if (!reviewsContainer) {
-    console.error("Не найден элемент с классом 'reviews'.");
-    return;
+    this.apiUrl = apiUrl;
+    this.attractionId = new URLSearchParams(window.location.search).get('id');
+    if (!this.attractionId) {
+      console.error("ID достопримечательности отсутствует в URL.");
+      return;
+    }
+
+    const reviewsTitle = this.createReviewsTitle();
+    this.container.append(reviewsTitle);
+
+    const reviewForm = this.createReviewForm();
+    this.container.append(reviewForm);
+
+    this.loadReviews();
   }
 
-  const attractionId = new URLSearchParams(window.location.search).get('id');
-
-  if (!attractionId) {
-    console.error("ID достопримечательности отсутствует в URL.");
-    return;
+  createReviewsTitle() {
+    const reviewsTitle = document.createElement('h2');
+    reviewsTitle.className = 'reviews__title';
+    reviewsTitle.textContent = 'Отзывы';
+    return reviewsTitle;
   }
 
-  const reviewsTitle = document.createElement('h2');
-  reviewsTitle.className = 'reviews__title';
-  reviewsTitle.textContent = 'Отзывы';
-
-  reviewsContainer.append(reviewsTitle);
-
-  const createReviewForm = () => {
+  createReviewForm() {
     const form = document.createElement('form');
     const nameInput = document.createElement('input');
     const commentInput = document.createElement('textarea');
@@ -32,26 +42,29 @@ document.addEventListener("DOMContentLoaded", () => {
     nameInput.placeholder = 'Введите имя';
     nameInput.required = true;
     nameInput.maxLength = 12;
+
     commentInput.className = 'review-form__textarea';
     commentInput.placeholder = 'Введите комментарий';
     commentInput.required = true;
-    commentInput.maxLength = 150
+    commentInput.maxLength = 150;
+
     emailInput.className = 'review-form__input';
     emailInput.type = 'email';
     emailInput.placeholder = 'Введите email';
     emailInput.required = true;
+
     submitButton.className = 'review-form__submit';
     submitButton.type = 'submit';
     submitButton.textContent = 'Отправить';
 
     form.append(nameInput, commentInput, emailInput, submitButton);
 
-    form.addEventListener('submit', (event) => handleReviewSubmit(event));
+    form.addEventListener('submit', (event) => this.handleReviewSubmit(event));
 
     return form;
-  };
+  }
 
-  const handleReviewSubmit = (event) => {
+  handleReviewSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -63,10 +76,10 @@ document.addEventListener("DOMContentLoaded", () => {
       name: nameInput.value,
       comment: commentInput.value,
       email: emailInput.value,
-      attractionId,
+      attractionId: this.attractionId,
     };
 
-    fetch('https://6734e04a5995834c8a9132b6.mockapi.io/reviews', {
+    fetch(`${this.apiUrl}/reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,21 +88,20 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((response) => response.json())
       .then((newReview) => {
-        const reviewElement = createReviewElement(newReview);
-        reviewsContainer.querySelector('.reviews__list').append(reviewElement);
+        const reviewElement = this.createReviewElement(newReview);
+        this.container.querySelector('.reviews__list').append(reviewElement);
         nameInput.value = '';
         commentInput.value = '';
         emailInput.value = '';
       })
       .catch((error) => console.error('Ошибка при добавлении отзыва:', error));
-  };
+  }
 
-  const createReviewElement = (review) => {
+  createReviewElement(review) {
     const reviewBlock = document.createElement('div');
     const reviewerName = document.createElement('h3');
     const reviewComment = document.createElement('p');
     const deleteButton = document.createElement('button');
-
 
     reviewBlock.className = 'review-block';
     reviewBlock.dataset.reviewId = review.id;
@@ -100,43 +112,43 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteButton.className = 'review-block__delete';
     deleteButton.textContent = 'X';
 
-    deleteButton.addEventListener('click', () => {
-      const reviewId = review.id;
-      fetch(`https://6734e04a5995834c8a9132b6.mockapi.io/reviews/${reviewId}`, {
-        method: 'DELETE',
-      })
-        .then(() => {
-          reviewBlock.remove();
-        })
-        .catch((error) => console.error('Ошибка при удалении отзыва:', error));
-    });
+    deleteButton.addEventListener('click', () => this.handleDeleteReview(review.id, reviewBlock));
 
     reviewBlock.append(reviewerName, reviewComment, deleteButton);
 
     return reviewBlock;
-  };
+  }
 
-  const loadReviews = () => {
-    fetch('https://6734e04a5995834c8a9132b6.mockapi.io/reviews')
+  handleDeleteReview(reviewId, reviewBlock) {
+    fetch(`${this.apiUrl}/reviews/${reviewId}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        reviewBlock.remove();
+      })
+      .catch((error) => console.error('Ошибка при удалении отзыва:', error));
+  }
+
+  loadReviews() {
+    fetch(`${this.apiUrl}/reviews`)
       .then((response) => response.json())
       .then((reviews) => {
-        const filteredReviews = reviews.filter(review => review.attractionId === attractionId);
+        const filteredReviews = reviews.filter(review => review.attractionId === this.attractionId);
 
         const reviewsList = document.createElement('div');
         reviewsList.className = 'reviews__list';
 
         filteredReviews.forEach((review) => {
-          const reviewElement = createReviewElement(review);
+          const reviewElement = this.createReviewElement(review);
           reviewsList.append(reviewElement);
         });
 
-        reviewsContainer.append(reviewsList);
+        this.container.append(reviewsList);
       })
       .catch((error) => console.error('Ошибка при загрузке отзывов:', error));
-  };
+  }
+}
 
-  const reviewForm = createReviewForm();
-  reviewsContainer.append(reviewForm);
-
-  loadReviews();
+document.addEventListener("DOMContentLoaded", () => {
+  new ReviewSection('.reviews', 'https://6734e04a5995834c8a9132b6.mockapi.io');
 });
