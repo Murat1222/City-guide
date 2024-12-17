@@ -7,10 +7,12 @@ const filterAttractionsBlocks = (categoryName) => {
 };
 
 const handleCategoryClick = (event) => {
-  const activeCategoryName = event.target.getAttribute('data-filter');
-  
   event.preventDefault();
-  filterAttractionsBlocks(activeCategoryName);
+  const activeCategory = event.target.getAttribute('data-filter');
+  
+  currentCategoryName = activeCategory === "all" ? null : activeCategory;
+
+  updateAttractionSection();
 };
 
 const debouncedHandleCategoryClick = debounce(handleCategoryClick);
@@ -21,6 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   categoriesLinks.forEach((categoryLink) => {
     categoryLink.addEventListener('click', (event) => {
       debouncedHandleCategoryClick(event);
-    })
+    });
   });
 });

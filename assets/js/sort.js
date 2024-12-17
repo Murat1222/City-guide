@@ -1,16 +1,10 @@
 let currentSortBy = null;
 let currentOrder = null;
+let currentCategoryName = null;
 
-const handleSortButtonClick = (sortBy) => {
-  if (currentSortBy === sortBy) {
-    currentOrder = currentOrder === 'alph' ? null : 'alph';
-  } else {
-    currentSortBy = sortBy;
-    currentOrder = 'alph';
-  }
+const updateAttractionSection = (page = 1) => {
+  const urlObject = getUrlObject(cityGuideApiUrl, page, blocksPerPage, null, currentCategoryName, currentSortBy, currentOrder);
 
-  const urlObject = getUrlObject(cityGuideApiUrl, 1, blocksPerPage, null, null, currentSortBy, currentOrder);
-  
   fetchAttractionsData(urlObject)
     .then((data) => {
       if (data) {
@@ -25,24 +19,22 @@ const handleSortButtonClick = (sortBy) => {
     });
 };
 
+const handleSortButtonClick = (sortBy) => {
+  if (currentSortBy === sortBy) {
+    currentOrder = currentOrder === 'alph' ? null : 'alph';
+  } else {
+    currentSortBy = sortBy;
+    currentOrder = 'alph';
+  }
+  
+  updateAttractionSection();
+};
+
 const handleResetSortButtonClick = () => {
   currentSortBy = null;
   currentOrder = null;
-
-  const urlObject = getUrlObject(cityGuideApiUrl, 1, blocksPerPage);
-
-  fetchAttractionsData(urlObject)
-    .then((data) => {
-      if (data) {
-        showAttractionCards(data);
-        if (data.totalCount) {
-          showPaginationButtons(data.totalCount, blocksPerPage);
-        }
-      }
-    })
-    .catch((error) => {
-      console.error('Ошибка при сбросе сортировки:', error);
-    });
+  
+  updateAttractionSection();
 };
 
 const debouncedHandleSortButtonClick = debounce(handleSortButtonClick);
