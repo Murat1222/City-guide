@@ -1,12 +1,17 @@
-const searchInput = document.querySelector(".header__search-input");
+class SearchHandler {
+  constructor(cityGuideApiUrl) {
+    this.cityGuideApiUrl = cityGuideApiUrl;
+    this.searchInput = document.querySelector(".header__search-input");
+    this.debouncedHandleInput = debounce(this.handleInput.bind(this));
 
-const handleInput = (event) => {
-  const inputValue = event.target.value;
-  const urlObject = getUrlObject(cityGuideApiUrl, null, null, inputValue);
+    this.searchInput.addEventListener("input", this.debouncedHandleInput);
+  }
 
-  showAttractionSection(urlObject);
-};
+  handleInput(event) {
+    const inputValue = event.target.value;
+    const urlObject = getUrlObject(this.cityGuideApiUrl, null, null, inputValue);
+    showAttractionSection(urlObject);
+  }
+}
 
-const debouncedHandleInput = debounce(handleInput);
-
-searchInput.addEventListener("input", debouncedHandleInput);
+const searchHandler = new SearchHandler(cityGuideApiUrl);
