@@ -4,7 +4,8 @@ const handlePageButtonClick = (event) => {
   const loader = getLoadingIndicator();
   const attractionCardsContainer = document.querySelector(".main__blocks");
   const buttonNumber = event.target.getAttribute('data-page');
-  const urlObject = getUrlObject(cityGuideApiUrl, buttonNumber, blocksPerPage);
+  
+  const urlObject = getUrlObject(cityGuideApiUrl, buttonNumber, blocksPerPage, null, null, currentSortBy, currentOrder);
 
   attractionCardsContainer.innerHTML = "";
   attractionCardsContainer.insertAdjacentElement('beforebegin', loader);

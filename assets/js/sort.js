@@ -10,7 +10,19 @@ const handleSortButtonClick = (sortBy) => {
   }
 
   const urlObject = getUrlObject(cityGuideApiUrl, 1, blocksPerPage, null, null, currentSortBy, currentOrder);
-  showAttractionSection(urlObject);
+  
+  fetchAttractionsData(urlObject)
+    .then((data) => {
+      if (data) {
+        showAttractionCards(data);
+        if (data.totalCount) {
+          showPaginationButtons(data.totalCount, blocksPerPage);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error('Ошибка при загрузке данных:', error);
+    });
 };
 
 const handleResetSortButtonClick = () => {
@@ -18,7 +30,19 @@ const handleResetSortButtonClick = () => {
   currentOrder = null;
 
   const urlObject = getUrlObject(cityGuideApiUrl, 1, blocksPerPage);
-  showAttractionSection(urlObject);
+
+  fetchAttractionsData(urlObject)
+    .then((data) => {
+      if (data) {
+        showAttractionCards(data);
+        if (data.totalCount) {
+          showPaginationButtons(data.totalCount, blocksPerPage);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error('Ошибка при сбросе сортировки:', error);
+    });
 };
 
 const debouncedHandleSortButtonClick = debounce(handleSortButtonClick);
