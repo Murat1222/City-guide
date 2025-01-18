@@ -1,0 +1,239 @@
+.header_main_container{
+  background: url(../img/Kazan.webp) no-repeat center / cover;
+}
+
+.main{
+  &__container{
+      padding-top: 100px;
+      padding-bottom: 200px;
+      max-width: 700px;
+      color: #ffffff;
+  }
+
+  &__text{
+      font-size: 70px;
+      padding-top: 10px;
+      @media (max-width: 768px) {
+          font-size: 60px;
+      }
+      @media (max-width: 320px) {
+          font-size: 38px;
+      }
+  }
+
+  &__text-second{
+      margin-top: 40px;
+      font-size: 28px;
+      padding-bottom: 258px;
+      color: #a2a0a0;
+      @media (max-width: 320px) {
+          font-size: 22px;
+      }
+  } 
+}
+
+.slider{
+    position: relative;
+    margin: auto;
+    height: 700;
+    background-color: #ffffff;
+    margin-top: 30px;
+    bottom: 200px;
+    border: solid 1px rgb(0, 0, 0);
+    &__text{
+        font-size: 50px;
+        text-align: center;
+        padding: 20px;
+        color: #000000;
+        font-weight: 300;
+    }
+}
+
+.slider .item img {
+    object-fit: cover;
+    width: 100%;
+    height: 690px;
+    margin-bottom: -4px;
+}
+
+.slider .previous, .slider .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: rgb(238, 255, 0);
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+.slider .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+
+.slider .previous:hover,
+.slider .next:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.blocks{
+  &__main-text{
+      text-align: center;
+      font-weight: 900;
+      font-size: 40px;
+      margin-top: -100px;
+      margin-bottom: 50px;
+  }
+  &__first-block{
+      display: flex;
+      border: solid 1px black;
+      border-radius: 20px;
+      margin: 20px 0;
+      @media (max-width: 768px) {
+          display: block;
+      }
+  }
+  &__img-first{
+      border-radius: 18px 0px 0px 18px;
+      @media (max-width: 768px) {
+          border-radius: 18px 18px 0px 0px;
+          width: 698px;
+          height: 450px;
+      }
+      @media (max-width: 480px) {
+          width: 418px;
+          height: 450px;
+      }
+      @media (max-width: 320px) {
+          width: 298px;
+          height: 400px;
+      }
+
+  }
+  &__first-txt{
+      font-size: 36px;
+      text-align: center;
+      font-weight: 900;
+      padding: 40px 10px;
+  }
+  &__second-txt{
+      font-size: 24px;
+      font-weight: 200;
+      text-align: center;
+      @media (max-width: 1500px) {
+          font-size: 22px;
+      }
+      @media (max-width: 1024px) {
+          font-size: 20px;
+          margin-bottom: 10px;
+      }
+  }
+  &__second-block{
+      display: flex;
+      border: solid 1px black;
+      border-radius: 20px;
+      margin: 20px 0;
+      @media (max-width: 768px) {
+          display: block;
+      }
+  }
+  &__third-txt{
+      font-size: 36px;
+      text-align: center;
+      font-weight: 900;
+      padding: 40px 10px;
+  }
+  &__fourth-txt{
+      font-size: 24px;
+      font-weight: 200;
+      text-align: center;
+      @media (max-width: 1500px) {
+          font-size: 22px;
+      }
+      @media (max-width: 1024px) {
+          font-size: 20px;
+          margin-bottom: 10px;
+      }
+  }
+  &__img-second{
+      border-radius: 0px 18px 18px 0;
+      @media (max-width: 768px) {
+          border-radius: 0px 0px 18px 18px;
+          width: 698px;
+          height: 450px;
+          margin-bottom: -4px;
+      }
+      @media (max-width: 480px) {
+          width: 418px;
+          height: 450px;
+      }
+      @media (max-width: 320px) {
+          width: 298px;
+          height: 400px;
+      }
+  }
+  &__third-block{
+      display: flex;
+      border: solid 1px black;
+      border-radius: 20px;
+      margin: 20px 0;
+      @media (max-width: 768px) {
+          display: block;
+      }
+  }
+  &__img-third{
+      border-radius: 18px 0px 0px 18px;
+      @media (max-width: 768px) {
+          border-radius: 18px 18px 0px 0px;
+          width: 698px;
+          height: 450px;
+      }
+      @media (max-width: 480px) {
+          width: 418px;
+          height: 450px;
+      }
+      @media (max-width: 320px) {
+          width: 298px;
+          height: 400px;
+      }
+  }
+  &__fifth-txt{
+      font-size: 36px;
+      text-align: center;
+      font-weight: 900;
+      padding: 40px 10px;
+  }
+  &__sixth-txt{
+      font-size: 24px;
+      font-weight: 200;
+      text-align: center;
+      @media (max-width: 1500px) {
+          font-size: 22px;
+      }
+      @media (max-width: 1024px) {
+          font-size: 20px;
+          margin-bottom: 10px;
+      }
+  }
+  &__txt-block{
+      padding: 0 10px;
+  }
+}
+
+.map{
+  margin-bottom: 50px;
+  &__text{
+      text-align: center;
+      font-weight: 900;
+      font-size: 40px;
+      margin: 40px 0;
+      @media (max-width: 320px) {
+          font-size: 20px;
+          text-align: center;
+      }
+  }
+}
