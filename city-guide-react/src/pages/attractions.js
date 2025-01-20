@@ -1,10 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAttractionsQuery } from '../components/useAttractionsQuery'
+import AttractionCard from '../components/AttractionCard'
+import { getLoadingIndicator } from '../components/Utils'
+
+import { Link } from 'react-router-dom'
 
 import '../assets/css/attractions.scss'
 
-
-
 function Attractions() {
+  const [currentPage] = useState(1)
+  const [blocksPerPage] = useState(10)
+
+  const { data, isLoading, isError, error } = useAttractionsQuery(
+    currentPage,
+    blocksPerPage
+  )
+
+  if (isLoading) return getLoadingIndicator()
+  if (isError) return <div>{error.message}</div>
+
+  const categories = [
+    { name: 'Все', filter: 'all' },
+    { name: 'Музеи', filter: 'museum' },
+    { name: 'Парки', filter: 'park' },
+    { name: 'Мечети', filter: 'mosque' },
+    { name: 'Остальное', filter: 'other' },
+  ]
+
   return (
     <div>
       <div className="categories">
@@ -12,25 +34,16 @@ function Attractions() {
           <p className="categories__title">Категории</p>
         </div>
         <div className="categories__list">
-          <a
-            className="categories__link categories__link--active"
-            href="#"
-            data-filter="all"
-          >
-            Все
-          </a>
-          <a className="categories__link" href="#" data-filter="museum">
-            Музеи
-          </a>
-          <a className="categories__link" href="#" data-filter="park">
-            Парки
-          </a>
-          <a className="categories__link" href="#" data-filter="mosque">
-            Мечети
-          </a>
-          <a className="categories__link" href="#" data-filter="other">
-            Остальное
-          </a>
+          {categories.map((category, index) => (
+            <Link
+              key={index}
+              className={`categories__link ${category.filter === 'all' ? 'categories__link--active' : ''}`}
+              href="#"
+              data-filter={category.filter}
+            >
+              {category.name}
+            </Link>
+          ))}
         </div>
       </div>
       <div className="sorting">
@@ -44,14 +57,15 @@ function Attractions() {
           </button>
         </div>
       </div>
-      <main className="main__attractions">
+      <main className="attractions">
         <div className="container">
-          <div className="main__attractions__text-block">
-            <p className="main__attractions__text">Достопримечательности</p>
-            <div className="main__blocks" id="main__blocks"></div>
-            <div className="main__pagination"></div>
-            <div className="attraction-cards-container"></div>
-            <div className="attraction-details"></div>
+          <div className="attractions__text-block">
+            <p className="attractions__text">Достопримечательности</p>
+            <div className="attractions__blocks">
+              {data.map((attraction) => (
+                <AttractionCard key={attraction.id} {...attraction} />
+              ))}
+            </div>
           </div>
         </div>
       </main>
