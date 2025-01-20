@@ -1,13 +1,11 @@
+import React from 'react';
+
 export const getLoadingIndicator = () => {
-  const loaderWrapper = document.createElement("div");
-  const loader = document.createElement("div");
-
-  loaderWrapper.classList = "loader-wrapper";
-  loader.classList = "loader";
-
-  loaderWrapper.append(loader);
-
-  return loaderWrapper;
+  return (
+    <div className="loader-wrapper">
+      <div className="loader"></div>
+    </div>
+  );
 };
 
 export function debounce(fn, timeoutMs = 250) {
